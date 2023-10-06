@@ -35,6 +35,13 @@ export default class Parent extends Component {
     ]
   }
 
+  componentDidMount() {
+		const storedProducts = localStorage.getItem('products');
+		if (storedProducts) {
+			this.setState({ products: JSON.parse(storedProducts) });
+		}
+	}
+
   //Update Price
   updatePrice = (itemIndex)=>{
     let products = [...this.state.products];
