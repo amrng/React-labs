@@ -1,0 +1,24 @@
+.bg {
+    background-color: rgb(46, 16, 101) !important;
+    height: 90vh;
+    padding: 30px;
+}
+
+.back {
+    background-image: url("../imgs/Banner.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 4 !important;
+    height: 60vh;
+}
+
+.btn {
+    width: 250px;
+    height: 60px;
+    border: none;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    box-shadow: 0 0 20px 10px orange;
+}

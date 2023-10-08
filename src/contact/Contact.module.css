@@ -1,0 +1,54 @@
+.bg {
+    background-color: rgb(46, 16, 101) !important;
+    height: 90vh;
+    padding: 30px;
+}
+
+.sec {
+    height: 100%;
+}
+
+.back {
+    background-image: url("../imgs/contact.png") !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 4 !important;
+    position: relative;
+    bottom: 94px;
+    left: -110px;
+
+    height: 100vh;
+}
+
+.inp {
+    height: 40px;
+    border: none;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    color: orangered;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    height: 40px;
+    border: none;
+    border-radius: 0px 25px 25px 0px;
+}
+
+.btn:hover {
+    box-shadow: 0 0 20px 10px orange;
+}
+
+.threeBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.threeBtn:hover {
+    transition: 0.3s;
+    background-color: rgb(46, 16, 101);
+    border-color: rgb(46, 16, 101);
+}
