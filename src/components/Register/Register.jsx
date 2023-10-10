@@ -31,7 +31,7 @@ export default function Register() {
     })
   }
 
-  // old
+  // difficult way
   // const validate = (values)=>{
   //   let errors = {}
   //   // name validation
@@ -80,7 +80,7 @@ export default function Register() {
     name: Yup.string()
     .max(10, "Name must be less than 10 char")
     .min(3, "Name must be more than 3 char")
-    .required("Name mis required"),
+    .required("Name is required"),
 
     email: Yup.string()
     .email("Invalid email address")
@@ -128,46 +128,46 @@ export default function Register() {
       <form onSubmit={formik.handleSubmit}>
         {/* Name */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="text" placeholder='Name' name="name" id="name" className='form-control '
+        <input type="text" placeholder='Name' name="name" id="name" className='form-control my-3'
         value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.name && formik.touched.name?
-        <div className="alert alert-info">{formik.errors.name}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.name}</div> 
         : ""}        
         </div>
 
         {/* Email */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="email" placeholder='Email' name="email" id="email" className='form-control'
+        <input type="email" placeholder='Email' name="email" id="email" className='form-control my-3'
         value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.email && formik.touched.email?
-        <div className="alert alert-info h-25">{formik.errors.email}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.email}</div> 
         : ""}        
         </div>
 
         {/* Password */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="password" placeholder='Password' name="password" id="password" className='form-control'
+        <input type="password" placeholder='Password' name="password" id="password" className='form-control my-3'
         value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.password && formik.touched.password?
-        <div className="alert alert-info">{formik.errors.password}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.password}</div> 
         : ""}   
         </div>
 
         {/* rePassword */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="password" placeholder='Re-Password' name="rePassword" id="rePassword" className='form-control'
+        <input type="password" placeholder='Re-Password' name="rePassword" id="rePassword" className='form-control my-3'
         value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.rePassword && formik.touched.rePassword?
-        <div className="alert alert-info">{formik.errors.rePassword}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.rePassword}</div> 
         : ""}   
         </div>
 
         {/* Age */}
         <div className="form-group mb-5 w-75 mx-auto">
-        <input type="number" placeholder='Age' name="age" id="age" className='form-control'
+        <input type="number" placeholder='Age' name="age" id="age" className='form-control my-3'
         value={formik.values.age} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.age && formik.touched.age?
-        <div className="alert alert-info">{formik.errors.age}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.age}</div> 
         : ""}   
         </div>
         <button type='submit' className='btn btn-outline-info w-25  d-block mx-auto fw-bold'>

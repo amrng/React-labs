@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import style from "./Login.module.css"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { TokenContext } from '../../context/Token.context'
 
 
 
@@ -17,18 +18,24 @@ export default function Login() {
   // if there is error in response
   const [apiError, setApiError] = useState("")
 
+  let {setToken} = useContext(TokenContext)
+
+ 
+
     function login(values){
     setIsLoading(true)
     axios.post('https://sara7aiti.onrender.com/api/v1/user/signin', values).then((data)=> {
       console.log(data);
       if (data.data.message === "welcome" ) {
         setIsLoading(false)
-        setApiError("")
         navigate("/profile")
+        localStorage.setItem("Token", data.data.token)
+        setToken(data.data.token)
       }
     }).catch((err)=>{
+      console.log(err);
+      setApiError(err?.response.data.error)
       setIsLoading(false)
-      setApiError(err.response.data.error)
     })
   }
 
@@ -72,19 +79,19 @@ export default function Login() {
       <form onSubmit={formik.handleSubmit}>
         {/* Email */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="email" placeholder='Email' name="email" id="email" className='form-control'
+        <input type="email" placeholder='Email' name="email" id="email" className='form-control my-3'
         value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.email && formik.touched.email?
-        <div className="alert alert-info h-25">{formik.errors.email}</div> 
+        <div className="alert alert-info m-0 px-3 w-auto p-0">{formik.errors.email}</div> 
         : ""}        
         </div>
 
         {/* Password */}
         <div className="form-group mb-4 w-75 mx-auto">
-        <input type="password" placeholder='Password' name="password" id="password" className='form-control'
+        <input type="password" placeholder='Password' name="password" id="password" className='form-control my-3'
         value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         {formik.errors.password && formik.touched.password?
-        <div className="alert alert-info">{formik.errors.password}</div> 
+        <div className="alert alert-info m-0 p-0 px-3">{formik.errors.password}</div> 
         : ""}   
         </div>
 
