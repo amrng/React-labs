@@ -1,45 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import style from "./Profile.module.css"
 import img from "../../img/avatar.png"
-import axios from 'axios'
+// import axios from 'axios'
+// import { useQuery } from 'react-query'
 import jwtDecode from 'jwt-decode'
 import { Link } from 'react-router-dom'
-import { useQuery } from 'react-query'
 import PopUp from '../PopUp/PopUp';
+import { useDispatch, useSelector } from 'react-redux'
+import { getMessages } from '../../Redux/messagesSlice'
+
 
 
 
 export default function Profile() {
-  const [allMessages, setAllmessages] = useState([])
+  // const [allMessages, setAllmessages] = useState([])
+  
+  
+  // function getMessages(){
+    //   return axios.get("https://sara7aiti.onrender.com/api/v1/message", {
+      //     headers: {
+  //       token : localStorage.getItem("Token")
+  //     }
+  //   })
+  // }
+  // // Queries
+  // const query = useQuery('messages', getMessages)
+  
+  // useEffect(()=>{
+  //   setAllmessages(query.data?.data?.allMessages)
+  
+  //   getUserId()
+  // },[query.data])
+  
+
+
   const [userId, setUserId] = useState("")
   const [userName, setUserName] = useState("")
   const [modalShow, setModalShow] = useState(false);
   const [sharelink, setSharelink] = useState('');
 
 
-  function getMessages(){
-    return axios.get("https://sara7aiti.onrender.com/api/v1/message", {
-      headers: {
-        token : localStorage.getItem("Token")
-      }
-    })
-  }
-  // Queries
-  const query = useQuery('messages', getMessages)
+  const allMessages = useSelector((state)=> state.messages.message)
   
-  function getUserId(){
-    let decoded = jwtDecode(localStorage.getItem("Token"))
-    setUserId(decoded.id)
-    setUserName(decoded.name)
-  }
+  let dispatch = useDispatch()
   
-
-
   useEffect(()=>{
-    setAllmessages(query.data?.data?.allMessages)
+    getUserData()
+    dispatch(getMessages())    
+    },[allMessages, dispatch])
     
-    getUserId()
-  },[query.data])
+
+    
+    function getUserData(){
+      let decoded = jwtDecode(localStorage.getItem("Token"))
+      setUserId(decoded.id)
+      setUserName(decoded.name)
+    }
 
 
   const handleOpenModal = () => {
@@ -48,6 +64,7 @@ export default function Profile() {
 		setSharelink(url);
 		setModalShow(true);
 	};
+
 
   return (
     <>
@@ -70,25 +87,25 @@ export default function Profile() {
           </div>
         </div>
           
-          {query.data ? <div className="row">
+          {allMessages? <div className="row">
             <div className="col-md-12">
               
 
-              {allMessages?.length === 0 ? 
+              {allMessages.length === 0 ? 
               <div className="card p-3 bg-dark position-relative ">
                 <p className='text-white m-0'>You don't have any messages... </p>
                 </div> : ""}
 
-              {allMessages?.length === 0 ? 
+              {allMessages.length === 0 ? 
               "" : <><h4 className='text-white mb-3 '>Your messages:</h4></>}
 
-            {allMessages?.map((message) => { return <div key={message._id} className="card p-3 mb-3  bg-dark position-relative ">
+            {allMessages.map((message) => { return <div key={message._id} className="card p-3 mb-3  bg-dark position-relative ">
               <p className='text-white m-0'>{message.messageContent}</p>
             </div>})}
-                
-              
             </div>
-          </div> : <i className="fa-solid fa-spinner fa-spin-pulse fa-20xl"></i>
+          </div> 
+          :
+          <div className='text-center'><i className="fa-solid fa-spinner fa-spin-pulse fa-4xl mx-5 "></i></div> 
           }
           
     </div>
