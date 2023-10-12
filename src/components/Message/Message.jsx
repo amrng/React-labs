@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react'
+import React from 'react'
 // import style from "./Message.module.css"
 // import img from "../../img/avatar.png"
 // import { useParams } from 'react-router-dom';
@@ -7,8 +7,9 @@ import React, { useEffect } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 // import jwtDecode from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { postMessage } from '../../Redux/messagesSlice';
 
 
 export default function Message() {
@@ -48,17 +49,15 @@ export default function Message() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log({messageContent: values.messageContent,
-         receivedId: userIdParams.userId});
-
-         console.log(values.messageContent);
-    
-      dispatch(postMessage({messageContent: values.messageContent,
-         receivedId: userIdParams.userId}))
+      dispatch(
+        postMessage({messageContent: values.messageContent,
+          receivedId: userIdParams.userId})
+          )
     }
   })
 
-  
+
+
   return (
     <>
     <div className='w-50 mx-auto mt-5 '>

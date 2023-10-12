@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import style from "./Profile.module.css"
 import img from "../../img/avatar.png"
-// import axios from 'axios'
-// import { useQuery } from 'react-query'
 import jwtDecode from 'jwt-decode'
 import { Link } from 'react-router-dom'
+// import axios from 'axios'
+// import { useQuery } from 'react-query'
 import PopUp from '../PopUp/PopUp';
 import { useDispatch, useSelector } from 'react-redux'
 import { getMessages } from '../../Redux/messagesSlice'

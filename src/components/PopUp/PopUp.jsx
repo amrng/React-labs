@@ -9,7 +9,7 @@ export default function PopUp(props) {
       <Modal {...props}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
-			top>
+			top="true">
 
         <Modal.Header className="bg-dark border-3 border-black">
           <Modal.Title id="contained-modal-title-vcenter" className='text-white mx-auto'>Share Link</Modal.Title>
